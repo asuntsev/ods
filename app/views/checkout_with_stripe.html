@@ -1,0 +1,396 @@
+﻿<div id="checkout-with-stripe-page">
+    <div class="col-md-12 col-xs-12 col-sm-12">
+        <div class="container-fluid">
+            <div class="container body-content">
+
+<!--            <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
+                
+                <!-- ****************************************************************************************************** -->
+                
+                <div class="form-group">            
+                    <div class="row spacer"/>
+                </div>
+                    
+                <div class="row text-left">
+                    <div class="span12">
+                      <h4>Please, choose one of two following options how to donate:</h4>
+                    </div>
+                </div>
+                    
+                <div class="form-group">
+                        <hr></hr>
+                </div>
+                
+               <div class="container">
+                   <div class="row"> <!-- Example row of columns -->
+                       <div class="col-md-4">
+                           <h4>One time donation</h4>
+                           <p>By following to this option, your Credit Card will be charged just ones.</p>
+                       </div>
+                       <div class="col-md-4">
+                           <h4>Recurring payments</h4>
+                           <p>By following to this option, you will be prompted to setup a schedule when and of how much your Credit Card will be charged automatically.</p>
+                       </div>
+                   </div>
+
+                   <div class="row"> <!-- Example row of columns -->
+                       <div class="col-md-4">
+                           <!--<p><a class="btn btn-default" href="#" role="button">Make one time donation &raquo;</a></p>-->
+                           <button type="button" class="btn btn-info" role="button" data-bind="text: buttonMakeOneTimeDonationLabel(), enable: CheckoutPage_TypeOfPaymentButtons_Enabled, style: { color: 'black', fontWeight: 'bold' }, click: gotoMakeOneTimeDonation, clickBubble: false"></button>
+                       </div>
+                       <div class="col-md-4">
+                           <!--<p><a class="btn btn-default" href="#" role="button">Setup recurring payments &raquo;</a></p>-->
+                           <button type="button" class="btn btn-info" role="button" data-bind="text: buttonSetupRecurringDonationsLabel(), enable: CheckoutPage_TypeOfPaymentButtons_Enabled, style: { color: 'black', fontWeight: 'bold' }, click: gotoSetupRecurringDonations, clickBubble: false"></button>
+                       </div>
+                   </div>
+
+               </div> <!-- /container -->
+                    
+<!--           <div class="row smaller-spacer"/>                                                                                                                                                                                                                                                                                               -->
+<!--                                                                                                                                                                                                                                                                                                                                           -->
+<!--           <div class="form-group">                                                                                                                                                                                                                                                                                                        -->
+<!--                                                                                                                                                                                                                                                                                                                                           -->
+<!--                <div class="control-group">                                                                                                                                                                                                                                                                                                -->
+<!--                    <div class="row">                                                                                                                                                                                                                                                                                                      -->
+<!--                        <div class="col-md-12">                                                                                                                                                                                                                                                                                            -->
+<!--                            <div id="displayCheckoutResultTextArea_ParentDiv" class="col-md-12">                                                                                                                                                                                                                                           -->
+<!--                                   <input id="returnTo_SBC_EDU_MainPage_Button" type="button" class="form-control btn-info text-left" data-bind="value: returnTo_SBC_EDU_MainPage_ButtonLabel(), enable: finalActivityButtonsEnable, style: { color: 'black', fontWeight: 'bold' }, click: returnTo_SBC_EDU_MainPage, clickBubble: false"/>-->
+<!--                            </div>                                                                                                                                                                                                                                                                                                         -->
+<!--                        </div>                                                                                                                                                                                                                                                                                                             -->
+<!--                    </div>                                                                                                                                                                                                                                                                                                                 -->
+<!--                </div>                                                                                                                                                                                                                                                                                                                     -->
+                       
+<!--               <div class="vertical-container" class="panel panel-default">                                     -->
+<!--                   <div class="panel-body">                                                                     -->
+<!--                       <div class="row">                                                                        -->
+<!--                           <div class="col-md-12">                                                              -->
+<!--                                                                                                                -->
+<!--                               <div class="col-md-2">                                                           -->
+<!--                                   &nbsp;                                                                       -->
+<!--                               </div>                                                                           -->
+<!--                                                                                                                -->
+<!--                               <div class="col-lg-10" style="padding-right:20px; border-right: 1px solid #ccc;">-->
+<!--                                                                                                                -->
+<!--                                   <br/>                                                                        -->
+<!--                                                                                                                -->
+<!--                               </div>                                                                           -->
+<!--                           </div>                                                                               -->
+<!--                       </div>                                                                                   -->
+<!--                   </div>                                                                                       -->
+<!--               </div>                                                                                           -->
+<!--           </div>-->
+               
+               <!-- ****************************************************************************************************** -->
+                    
+                <div class="form-group" data-bind="visible: showTransactionProcessingResults()">            
+                    <div class="row smaller-spacer"/>
+                </div>
+                    
+                <div class="row text-left" data-bind="visible: showTransactionProcessingResults()">
+                    <div class="span12">
+                      <h4>Checkout processing status:</h4>
+                    </div>
+                </div>
+                    
+                <div class="form-group" data-bind="visible: showTransactionProcessingResults()">
+                        <hr></hr>
+                </div>
+                    
+                <!-- ****************************************************************************************************** -->
+                
+                <div class="form-group" data-bind="visible: showTransactionProcessingResults()">
+                    
+                    <div class="control-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="displayCheckoutResultTextArea_ParentDiv" class="col-md-12">
+<!--                                <textarea id="displayCheckoutResultTextArea" class="form-control" rows="15" maxlength="1000" readonly data-bind="value: checkoutResultMessage, attr: {placeholder: checkoutResultMessagePlaceHolder}, hasFocus: isDisplayCheckoutResultTextAreaFocus, style: { background: '#FFFFFF', color: messageFontColor(), fontFamily: 'Times', fontStyle: messageFontStyle(), border: 'none', resize: 'none', fontSize: '1.5em', textAlign: 'center'}"></textarea>-->
+                                    <textarea id="displayCheckoutResultTextArea" class="form-control" rows="23" maxlength="1000" readonly data-bind="value: checkoutResultMessage, attr: {placeholder: checkoutResultMessagePlaceHolder}, hasFocus: isDisplayCheckoutResultTextAreaFocus, style: { background: '#FFFFFF', color: messageFontColor(), fontFamily: 'Times', border: 'none', resize: 'none', fontSize: '1.5em', textAlign: 'center'}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="form-group"></div>
+                    
+                    <div class="row text-left">
+                        <div class="span12">
+                          <h4>Please select where you would like to navigate to:</h4>
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                            <hr></hr>
+                    </div>
+                        
+                    <div class="vertical-container" class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                    <div class="col-md-2">
+                                        &nbsp;
+                                    </div>
+                    
+                                    <div class="col-lg-10" style="padding-right:20px; border-right: 1px solid #ccc;">
+                    
+                                        <input id="returnTo_SBC_EDU_MainPage_Button" type="button" class="form-control btn-info text-left" data-bind="value: returnTo_SBC_EDU_MainPage_ButtonLabel(), enable: finalActivityButtonsEnable, style: { color: 'black', fontWeight: 'bold' }, click: returnTo_SBC_EDU_MainPage, clickBubble: false"/>
+                                        <br/>
+                    
+                                        <input id="returnTo_SBC_Giving_Page_Button" type="button" class="form-control btn-info text-left" data-bind="value: returnTo_SBC_Giving_Page_ButtonLabel(), enable: finalActivityButtonsEnable, style: { color: 'black', fontWeight: 'bold' }, click: returnTo_SBC_Giving_Page, clickBubble: false"/>
+                                        <br/>
+                    
+                                        <input id="print_ConfirmationMessage_Button" type="button" class="form-control btn-info text-left" data-bind="value: print_ConfirmationMessage_ButtonLabel(), visible: print_ConfirmationMessage_ButtonVisible(), enable: print_ConfirmationMessage_ButtonEnable(), style: { color: 'black', fontWeight: 'bold' }, click: print_ConfirmationMessage, clickBubble: false"/>
+                                        <br/>
+                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                            <hr></hr>
+                    </div>
+                    
+                </div>    
+                    
+                <!--**************************************************************************************************-->
+                
+                <div class="container">
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="RecurringPayments_ModalWindow" role="dialog">
+                        <div class="modal-dialog" role="document">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                
+                                <div class="modal-header" style="padding:2em 2em;">
+                                  <h4><span class="glyphicon glyphicon-tasks"></span> Setting up a schedule of recurring payments</h4>
+                                </div>
+                                  
+                                <div class="modal-body">
+                                    <form role="form">
+                                            
+                                        <form class="form-horizontal custom-form" role="form">
+
+                                            <div class="form-group" style="margin-bottom: 0em;">
+                                                <div class="col-md-7 text-left">
+                                                    <label for="RecurringPayments_Interval" class="control-label">Interval:</label>
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <div class="row">
+                                                        <div class="col-md-10" style="padding-left: 0em; padding-right: 0em;">
+                                                            <select id="RecurringPayments_Interval" class="form-control" data-bind="options: RecurringPayments_ListOfIntervals, optionsText: 'interval_description', optionsValue : 'interval_code', value: RecurringPayments_SelectedRecurringInterval"></select>
+                                                        </div>
+                                                        <div class="col-md-1" style="padding-top: 0.3em;">
+                                                            <div class="input-group">                           
+                                                                <button class="btn btn-xs" data-bind="click: RecurringPayments_ShowHelpPopWindow">
+                                                                    <span style="color:black; font-size:150%;" class="glyphicon glyphicon-question-sign"></span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>        
+                                        
+                                        <form class="form-horizontal custom-form" role="form">
+
+                                            <div class="form-group" style="margin-bottom: 0em;">
+                                                <div class="col-md-7 text-left">
+                                                    <label for="RecurringPayments_Duration" class="control-label">Duration of the Subscription:</label>
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <div class="row">
+                                                        <div class="col-md-10" style="padding-left: 0em; padding-right: 0em;">
+                                                            <div class="input-group">
+                                                                    <input id="RecurringPayments_Duration" class="form-control" data-bind="value: RecurringPayments_Duration, valueUpdate:'change', event:{keypress: $root.RecurringPayments_Duration_enterKeyProcessing}" placeholder="Please, enter number of chosen intervals (above) to setup overall period of recurring payments" type="text"></input>
+                                                                    <span class="input-group-addon" data-bind="text: RecurringPayments_IntervalUnit"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1" style="padding-top: 0.3em;">
+                                                            <div class="input-group">                           
+                                                                <button class="btn btn-xs" data-bind="click: RecurringPayments_ShowHelpPopWindow">
+                                                                    <span style="color:black; font-size:150%;" class="glyphicon glyphicon-question-sign"></span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>        
+                                        
+                                        <form class="form-horizontal custom-form" role="form">
+
+                                            <div class="form-group" style="margin-bottom: 0em;">
+                                                <div class="col-md-7 text-left">
+                                                    <label for="RecurringPayments_DayOfPayment" class="control-label">Day when you'd like your Card is charged:</label>
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <div class="row">
+                                                        <div class="col-md-10" style="padding-left: 0em; padding-right: 0em;">
+                                                            <input id="RecurringPayments_DayOfPayment" class="form-control" data-bind="value: RecurringPayments_DayOfPayment, valueUpdate:'change', event:{keypress: $root.RecurringPayments_DayOfPayment_enterKeyProcessing}" placeholder="Please, enter desirable day of month when your Card will be charged automatically" type="text"></input>
+                                                        </div>
+                                                        <div class="col-md-1" style="padding-top: 0.3em;">
+                                                            <div class="input-group">                           
+                                                                <button class="btn btn-xs" data-bind="click: RecurringPayments_ShowHelpPopWindow">
+                                                                    <span style="color:black; font-size:150%;" class="glyphicon glyphicon-question-sign"></span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>        
+                                                
+                                        <div data-bind="visible: RecurringPayments_SkipFirstMonth_Visible()">
+                                        <form class="form-horizontal custom-form" role="form">
+
+                                            <div class="form-group" style="margin-bottom: 0em;">
+                                                <div class="col-md-7 text-left">
+                                                    <label for="RecurringPayments_skipFirstMonth" class="control-label">Skip first month?</label>
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <div class="row">
+                                                        <div class="col-md-10" style="padding-left: 0.4em; padding-right: 0em; padding-top: 0.3em;">
+                                                            <input id="RecurringPayments_skipFirstMonth" type="checkbox" data-bind="checked: RecurringPayments_SkipFirstMonth"></input>
+                                                        </div>
+<!--                                                    <div class="col-md-1" style="padding-top: 0.3em;">-->
+                                                        <div class="col-md-1">
+                                                            <div class="input-group">                           
+                                                                <button class="btn btn-xs" data-bind="click: RecurringPayments_ShowHelpPopWindow">
+                                                                    <span style="color:black; font-size:150%;" class="glyphicon glyphicon-question-sign"></span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>        
+                                        </div>
+                                            
+                                        <form class="form-horizontal custom-form" role="form">
+
+                                            <div class="form-group" style="margin-bottom: 0em;">
+                                                <div class="col-md-7 text-left">
+                                                    <label for="RecurringPayments_StatementDescriptor" class="control-label">Statement Descriptor, 22 chars max:</label>
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <div class="row">
+                                                        <div class="col-md-10" style="padding-left: 0em; padding-right: 0em;">
+                                                            <input id="RecurringPayments_StatementDescriptor" class="form-control" data-bind="value: RecurringPayments_StatementDescriptor, valueUpdate:'change', event:{keypress: $root.RecurringPayments_StatementDescriptor_enterKeyProcessing}" placeholder="Your bank statement's transaction descriptor (22 chars max)" type="text" maxlength="22"></input>
+                                                        </div>
+                                                        <div class="col-md-1" style="padding-top: 0.3em;">
+                                                            <div class="input-group">                           
+                                                                <button class="btn btn-xs" data-bind="click: RecurringPayments_ShowHelpPopWindow">
+                                                                    <span style="color:black; font-size:150%;" class="glyphicon glyphicon-question-sign"></span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>        
+                                                
+                                        <form class="form-horizontal custom-form" role="form">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                <!-- See http://www.knockmeout.net/2011/06/fun-with-highlighting-in-knockoutjs.html -->
+                                                    <pre style="background: #fcf9f1;" data-bind="highlightedText: { text: RecurringPayments_Verdict, what_to_highlight_1: bit_of_text_1, what_to_highlight_2: bit_of_text_2, what_to_highlight_3: bit_of_text_3, what_to_highlight_4: bit_of_text_4, what_to_highlight_5: bit_of_text_5, what_to_highlight_6: bit_of_text_6, css: StyleClassNameForHighlightingPartOfTextArea }"></pre>
+                                                </div>
+                                            </div>
+                                        </form>        
+                                        
+                                    </form>
+                                </div>
+                                            
+                                <div class="modal-footer">
+<!--                              <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal" data-bind="click: closeModalWindow"><span class="glyphicon glyphicon-remove"></span> Cancel</button>-->
+                                  <button type="submit" class="btn btn-warning btn-default pull-left" data-bind="click: closeModalWindow_and_CancelData, style: { color: 'black', fontWeight: 'bold' }"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                  <button type="submit" class="btn btn-success btn-default pull-right" data-bind="click: closeModalWindow_and_SubmitData, style: { color: 'black', fontWeight: 'bold' }"><span class="glyphicon glyphicon-ok"></span> Submit Recurring Payments Schedule</button>
+                                </div>
+                                
+                            </div>
+                          
+                        </div>
+                    </div> 
+                </div>
+                    
+                <!--**************************************************************************************************-->
+                
+                <div class="container">
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="RecurringPayments_Interval_ToolTip_ModalWindow" role="dialog">
+                        <div class="modal-dialog" role="document">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                
+                                <div class="modal-header-tooltip" style="padding:2em 2em;">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">A description of values used for setting up Recurring payments schedule</h4>
+                                </div>
+                                    
+                                <div class="modal-body">
+                                    <form role="form">
+                                            
+                                        <form class="form-horizontal custom-form" role="form">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                <!-- See http://www.knockmeout.net/2011/06/fun-with-highlighting-in-knockoutjs.html -->
+                                                    <pre style="background: #fcf9f1;" data-bind="highlightedText: { text: RecurringPayments_Interval_ToolTip_Text, what_to_highlight_1: bit_of_text_1, what_to_highlight_2: bit_of_text_2, what_to_highlight_3: bit_of_text_3, what_to_highlight_4: bit_of_text_4, what_to_highlight_5: bit_of_text_5, what_to_highlight_6: bit_of_text_6, css: StyleClassNameForHighlightingPartOfTextArea }"></pre>
+<!--                                                <pre style="background: #fcf9f1;" data-bind="text: RecurringPayments_Interval_ToolTip_Text, css: StyleClassNameForHighlightingPartOfTextArea"></pre>-->
+                                                </div>
+                                            </div>
+                                        </form>        
+                                        
+                                    </form>
+                                </div>
+                                            
+<!--                            <div class="modal-footer">                                                                                                                                                                                                                                       -->
+<!--                              <button type="submit" class="btn btn-warning btn-default pull-left" data-bind="click: closeModalWindow_and_CancelData, style: { color: 'black', fontWeight: 'bold' }"><span class="glyphicon glyphicon-remove"></span> Cancel</button>                         -->
+<!--                              <button type="submit" class="btn btn-success btn-default pull-right" data-bind="click: closeModalWindow_and_SubmitData, style: { color: 'black', fontWeight: 'bold' }"><span class="glyphicon glyphicon-ok"></span> Submit Recurring Payments Schedule</button>-->
+<!--                            </div>                                                                                                                                                                                                                                                           -->
+                                
+                            </div>
+                          
+                        </div>
+                    </div> 
+                </div>
+                    
+                <!--**************************************************************************************************-->
+                    
+                <!-- Please, pay attention that nav-btn class below is custom class and it's defined by me at bootstrap.min.css file (or in project_custom.css file) -->
+                <!-- Also, please, pay attention on "style" attribute of the button objects below: some styles (like borderColor) is written differently -->
+                <!-- that it comes to clear CSS style (border-color). See http://stackoverflow.com/questions/17970313/using-knockout-to-set-css-class-with-an-if-condition -->
+                
+                <div class="form-group" data-bind="visible: CheckoutPage_VisibleGoToPreviousPageButton()">            
+                    <div class="row bigger-spacer"/>
+                </div>
+                    
+                <div class="form-group" data-bind="visible: CheckoutPage_VisibleGoToPreviousPageButton()">
+                    <hr></hr>
+                </div>
+                    
+                <div class="row text-left">
+                    <div class="span12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input id="goToPreviousPageButton" type="button" class="sbcNavigationButtonsDesign form-control btn-secondary text-left" data-bind="value: buttonPreviousPageLabel(), visible: CheckoutPage_VisibleGoToPreviousPageButton, enable: CheckoutPage_VisibleGoToPreviousPageButton, click: gotoPreviousPage, clickBubble: false"/>
+                            </div>
+                            <div class="col-md-4"/>
+                            <div class="col-md-5 text-right">
+                                <input id="returnTo_SBC_EDU_MainPage_Button" type="button" class="sbcNavigationButtonsDesign form-control btn-secondary text-left" data-bind="value: cancelOverallGivingProcess_ButtonLabel(), visible: CheckoutPage_VisibleGoToPreviousPageButton, enable: CheckoutPage_VisibleGoToPreviousPageButton, click: returnTo_SBC_EDU_MainPage, clickBubble: false"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+                

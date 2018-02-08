@@ -1,0 +1,291 @@
+<!-- All rights are reserved. By Andrey Suntsev 2015-2018 -->
+<!DOCTYPE html>
+<html>
+<div class="wrapper">
+    <head>
+        <title>SBC Giving</title>
+        
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+        
+<!--    $(document).ready(function(){              -->                                       
+<!--                                               -->                                       
+<!--        $("body").html("jQuery is working");   -->                                       
+<!--                                               -->                                       
+<!--    });                                        -->                                       
+<!--                                               -->
+<!--</script>                                      -->
+        
+        <link rel="apple-touch-startup-image" href="lib/durandal/img/ios-startup-image-landscape.png" media="(orientation:landscape)" />
+        <link rel="apple-touch-startup-image" href="lib/durandal/img/ios-startup-image-portrait.png" media="(orientation:portrait)" />
+        <link rel="apple-touch-icon" href="lib/durandal/img/icon.png"/>
+        
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-select.min.css" />
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="css/ie10mobile.css" />
+        <link rel="stylesheet" href="lib/durandal/css/durandal.css" />
+        <link rel="stylesheet" href="css/starterkit.css" />
+        
+        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+
+<!--    <script language="javascript" type="text/javascript" src="lib/phoneparser/phoneparser.js"></script>-->
+        
+        <script type="text/javascript">
+            if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+                var msViewportStyle = document.createElement("style");
+                var mq = "@@-ms-viewport{width:auto!important}";
+                msViewportStyle.appendChild(document.createTextNode(mq));
+                document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+            }
+        </script>
+        
+        <!-- See http://stackoverflow.com/questions/121203/how-to-detect-if-javascript-is-disabled -->
+        <noscript>
+        
+            <style type="text/css">
+                .pagecontainer {display:none;}
+            </style>
+            
+            <div class="form-group">
+                    <hr></hr>
+            </div>
+            <div class="noscriptmsg" style="background: grey; text-align: center">
+                <h3><strong>You don't have JavaScript enabled on your WEB browser.</strong></h3>
+                <h4><strong>Yes, we know it's embarrassing, but this page can not work properly without JavaScript support</strong></h4>
+                <h4><strong>Please, enable JavaScript (see menu Settings) and restart the page.</strong></h4>
+            </div>
+            <div class="form-group">
+                    <hr></hr>
+            </div>
+        
+        </noscript>
+        
+    </head>
+
+    <style> 
+                                                                                         
+        .bgimage 
+        {
+            /*background-image: url('http://localhost/ods-make-one-time-donation/Library_1600x1200.jpg');*/
+            background-image: url('http://localhost/ods-make-one-time-donation/OldLibrary_1620x1215.jpg');
+            background-size: 100%;
+            /*height:1279px;*/
+        }
+
+        .bgimage-inside 
+        {
+            /*padding-top: 37.36%;*/ /* this is actually (426/1140)*100 */
+            padding-bottom: 18%; /* this is actually (426/1140)*100 */
+        }
+        
+/*      .full*/
+        html 
+        {
+            /* Original: background: url('http://localhost/ods-make-one-time-donation/NewLibrary_v2_JustCropped_Flattened_Opacity85.png') no-repeat center center fixed; */
+            /*background: url('https://s3.amazonaws.com/asuntsev-www/ods/NewLibrary_v2_JustCropped_Flattened_Opacity85.png') no-repeat center center fixed;*/
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+/*          background-size: contain;*/
+            background-size: cover;
+/*          background-size: 2443px auto;*/
+            -o-background-size: cover;
+            height:100%;
+            /*padding-bottom: 18%;*/
+        }
+        
+        .sbc-button
+        {
+            background: #fcc1ec;
+            background-active: #fcc1ec;     /* This one is for shell.getCSS2 function's call. But I could not bring it to life... */
+            background-notactive: #c1fcc6;  /* This one is for shell.getCSS2 function's call. But I could not bring it to life... */
+            border-color: #7b7c7b;
+        }
+        
+        hr /* http://stackoverflow.com/questions/6382023/changing-the-color-of-a-hr-element */
+        {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #8d8d8d; /*#ccc; */
+            margin: 1em 0;
+            /*padding: 0; */
+            
+            padding: 0px;
+            margin: 0px; 
+        }
+        
+        .spacer /* http://stackoverflow.com/questions/10691442/adding-a-simple-spacer-to-twitter-bootstrap */ 
+        {
+            margin-top: 40px; /* define margin as you see fit */
+        }
+        
+        .smaller-spacer /* http://stackoverflow.com/questions/10691442/adding-a-simple-spacer-to-twitter-bootstrap */ 
+        {
+            margin-top: 10px; /* define margin as you see fit */
+        }
+        
+        .bigger-spacer /* http://stackoverflow.com/questions/10691442/adding-a-simple-spacer-to-twitter-bootstrap */ 
+        {
+            margin-top: 60px; /* define margin as you see fit */
+        }
+        
+        .modal-header, .close /* http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_modal2&stacked=h */
+        {
+/*          background-color: #519e58;*/
+            color:            black !important;
+            text-align:       center;
+            font-size:        1em;
+        }
+
+        .modal-header-tooltip, .close /* http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_modal2&stacked=h */
+        {
+/*          background-color: #519e58;*/
+            color:            black !important;
+            text-align:       left;
+            font-size:        1em;
+        }
+
+        .modal-footer 
+        {
+/*          background-color: white;*/
+        }
+        
+        /* See ...\ods-make-one-time-donation\lib\durandal\js\plugins\highlightedText.js */
+        /* And ...\ods-make-one-time-donation\app\viewmodels\checkout_with_stripe.js: self.RecurringPayments_Verdict.computed().write()*/
+        /* And ...\ods-make-one-time-donation\app\views\checkout_with_stripe.html */
+        .highlight-part-of-text 
+        {
+            font-weight: bold;
+        }
+        
+        .sbcPageNavigationMenuButton_background_Active
+        {
+            background-color: #519e58;
+        }
+        
+        .sbcPageNavigationMenuButton_background_inActive
+        {
+            background-color: #c1fcc6;
+        }
+        
+        .sbcPageNavigationMenuButton_borderColor_Active
+        {
+            border-color:     #a2a2a2;
+        }
+        
+        .sbcPageNavigationMenuButton_borderColor_inActive
+        {
+            border-color:     #7b7c7b;
+        }
+        
+        .sbcPageNavigationMenuButton_labelColor_Active
+        {
+            color:            black !important;
+        }
+        
+        .sbcPageNavigationMenuButton_labelColor_inActive
+        {
+            color:            grey !important;
+        }
+        
+        .sbcPageNavigationMenuButton_fontWeight_Active
+        {
+            font-weight:      bold !important;
+        }
+        
+        .sbcPageNavigationMenuButton_fontWeight_inActive
+        {
+            font-weight:      plain !important;
+        }
+        
+        .sbcNavigationButtonsDesign
+        {
+            color:            black !important;
+            font-weight:      bold !important;
+            background-color: #f4ebdf;
+            border-color:     #bebdbd;
+        }
+ 
+        .btn-sbcControlButtonDesign
+        {
+            background-color: #f4ebdf;
+            border-color:     #bebdbd;
+        }
+        
+        .vcenter 
+        {
+            display: inline-block;
+            vertical-align: middle;
+            float: none;
+        } 
+        
+/*@media (max-width:991px) {*/
+/*  .form-horizontal.custom-form .form-group .row [class*=col-]:first-child {*/
+/*      margin-bottom: 5px*/
+/*  }*/
+/*}*/
+
+/*    http://stackoverflow.com/questions/22329606/bootstrap-navbar-collapse-media-query-on-custom-width    */
+/*    
+    @media (max-width: 992px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
+*/    
+    </style>                                                                                                              
+
+    <body>
+        <div id="applicationHost">
+            <div class="splash">
+                <div class="message">
+                    Online Donation Supporting system
+                </div>
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+        </div>
+
+        <script src="lib/require/require.js" data-main="app/main"></script>
+    </body>
+    </div>
+</html>
